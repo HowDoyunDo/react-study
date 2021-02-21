@@ -2,6 +2,9 @@ const express = require('express')
 const app = express()
 const port = 5000
 const bodyPaser = require('body-parser')
+
+const config = require('./config/key');
+
 const { User } = require("./models/User")
 
 
@@ -16,7 +19,9 @@ const mongoose = require('mongoose')
 
 // @@ mongodb connection @@
 //                              userid:userpw
-mongoose.connect('mongodb+srv://doyun:doyun@cluster0.uiudz.mongodb.net/test?retryWrites=true&w=majority', {
+
+// #9 비밀정보 보호
+mongoose.connect(config.mongoURI, {
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(() => console.log('Mongo DB Connected...'))
   .catch(err => console.log(err))
